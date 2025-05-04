@@ -1,0 +1,235 @@
+<?php
+http_response_code(404);
+
+/* ==========================================================================
+   安全相关名人名言库
+   ========================================================================== */
+$quotes = [
+    [
+        "text"   => "在安全领域，只有两种人：那些知道自己被黑了的，和那些还不知道的。",
+        "author" => "Gene Spafford"
+    ],
+    [
+        "text"   => "计算机科学就是那些别人觉得你在修电脑的东西。",
+        "author" => "Alan Kay"
+    ],
+    [
+        "text"   => "好的程序员是现实的乐观主义者：他们相信不可能的事情只需要稍多一点时间。",
+        "author" => "Grady Booch"
+    ],
+    [
+        "text"   => "永远不要低估愚蠢的破坏力。",
+        "author" => "Linus Torvalds"
+    ],
+    [
+        "text"   => "安全不是产品，而是过程。",
+        "author" => "Bruce Schneier"
+    ],
+    [
+        "text"   => "过早优化是万恶之源。",
+        "author" => "Donald Knuth"
+    ]
+];
+$randomQuote = $quotes[array_rand($quotes)];
+?>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - 404</title>
+    <style>
+        /* ==================================================================
+           颜色变量
+           ================================================================== */
+        :root {
+            --color-primary:    #080808;    /* 黑曜石底色 */
+            --color-accent:     #8b0000;    /* 血红色 */
+            --color-secondary:  #404040;    /* 灰烬色 */
+            --color-text:       #d3d3d3;    /* 基础文字 */
+            --color-text-dim:   #808080;    /* 弱化文字 */
+            --color-border:     rgba(255,255,255,0.1);
+        }
+
+        /* ==================================================================
+           基础样式
+           ================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Consolas', monospace;
+        }
+
+        body {
+            background: var(--color-primary);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text);
+            position: relative;
+            overflow: hidden;
+        }
+
+        a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        /* ==================================================================
+           虚空背景特效
+           ================================================================== */
+        .void-effect {
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: 
+                radial-gradient(circle, transparent 20%, var(--color-primary) 70%),
+                repeating-linear-gradient(
+                    45deg, 
+                    rgba(255,0,0,0.05) 0 2px,
+                    transparent 2px 4px
+                );
+            animation: void 20s linear infinite;
+        }
+
+        /* ==================================================================
+           主容器
+           ================================================================== */
+        .container {
+            max-width: 700px;
+            padding: 2.5rem;
+            background: rgba(10, 10, 10, 0.95);
+            border: 1px solid var(--color-border);
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 0 30px rgba(0,0,0,0.7);
+        }
+
+        h1 {
+            font-size: 4em;
+            color: var(--color-accent);
+            margin-bottom: 1.25rem;
+            text-shadow: 0 0 10px rgba(139,0,0,0.5);
+        }
+
+        /* ==================================================================
+           警告面板
+           ================================================================== */
+        .warning-panel {
+            border-left: 3px solid var(--color-accent);
+            padding-left: 1.25rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .warning-panel::before {
+            content: "⚠";
+            position: absolute;
+            left: -1.875rem;
+            top: -0.25rem;
+            color: var(--color-accent);
+            font-size: 1.5em;
+        }
+
+        /* ==================================================================
+           名言引用框
+           ================================================================== */
+        .quote-box {
+            background: rgba(40,40,40,0.9);
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            border-left: 3px solid var(--color-secondary);
+            position: relative;
+        }
+
+        .quote-box::after {
+            content: "»";
+            position: absolute;
+            right: 1rem;
+            bottom: 0.25rem;
+            color: var(--color-secondary);
+            font-size: 2em;
+            opacity: 0.5;
+        }
+
+        /* ==================================================================
+           动作按钮
+           ================================================================== */
+        .action-button {
+            display: inline-block;
+            padding: 0.75rem 1.875rem;
+            background: var(--color-accent);
+            color: white !important;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid rgba(139,0,0,0.5);
+            margin-top: 1.25rem;
+        }
+
+        .action-button:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        /* ==================================================================
+           动画定义
+           ================================================================== */
+        @keyframes void {
+            from { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            to { transform: rotate(360deg) scale(1); }
+        }
+
+        /* ==================================================================
+           移动端适配
+           ================================================================== */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.25rem;
+                margin: 1rem;
+            }
+            
+            h1 {
+                font-size: 2.5em;
+            }
+            
+            .void-effect {
+                animation-duration: 40s;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="void-effect"></div>
+    <div class="container">
+        <h1>404</h1>
+        
+        <div class="warning-panel">
+            <p>> 该网页存在安全问题！</p>
+            <p>> 感谢您的访问！</p>
+            <p>> 建议操作：回去刷视频去吧。</p>
+            <p>> <a href='https://baidu.com'>404源码地址</a></p>
+        </div>
+
+        <div class="quote-box">
+            <p>"<?= htmlspecialchars($randomQuote['text'], ENT_QUOTES) ?>"</p>
+            <p style="margin-top: 0.9375rem; color: var(--color-text-dim);">—— <?= htmlspecialchars($randomQuote['author'], ENT_QUOTES) ?></p>
+        </div>
+
+        <a href="/" class="action-button">返回首页</a>
+    </div>
+</body>
+</html>
+<?php  
+/* 
+ Template Name: 404
+*/  
+?>
